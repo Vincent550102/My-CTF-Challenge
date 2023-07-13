@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: ./web
+    restart: always 
+    environment:
+      - BOT_HOST=bot
+      - BOT_PORT=8080
+    ports:
+      - 33332:5050 
+  bot:
+    build:
+      context: ./bot
+    environment:
+      - PORT=8080
+      - SITE=http://NEED/TO/CHANGE/login
+      - REPORT_HOST=web
+      - FLAG=SCIST{FAKEFLAG}

@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "fakelog"
+version = "0.1.0"
+description = ""
+authors = ["Vincent550102 <5020559@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+flask = "^2.3.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

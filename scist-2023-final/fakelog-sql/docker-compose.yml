@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: ./src
+      args:
+        FLAG: SCIST{FAKEFLAG}
+    restart: always 
+    ports:
+      - 5051:5050 
