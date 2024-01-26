@@ -117,7 +117,7 @@ Author: Vincent55
 - 這題的 flask 有開啟 debug mode (此題關鍵)
 - flag 的位置
 
-![image](./asset/dockerfile_LFI.png)
+![image](./assets/dockerfile_LFI.png)
 
 接下來，我們的目標是達到 RCE，透過一些搜尋，發現當 flask （或者說有使用 Werkzeug 的 debug 當作依賴） debug mode 開啟時，只要能取得以下資訊，便可將 pin code 反算回來。
 - username (可透過 Dockerfile 得知為 `daemon`)
