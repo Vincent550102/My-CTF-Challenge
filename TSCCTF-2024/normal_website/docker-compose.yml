@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  normal-website:
+    build:
+      context: src
+      args:
+        FLAG: TSCCTF{FAKEFLAG}
+    read_only: true
+    restart: always
+    ports:
+      - 33001:5050
+    storage_opt:
+      size: 1G
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G

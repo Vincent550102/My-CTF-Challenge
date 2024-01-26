@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+    exchange:
+        build:
+            context: ./src
+            args:
+                FLAG: TSCCTF{FAKEFLAG} 
+        ports:
+            - 33000:80/tcp
+        storage_opt:
+          size: 1G
+        deploy:
+          resources:
+            limits:
+              cpus: '1'
+              memory: 1G

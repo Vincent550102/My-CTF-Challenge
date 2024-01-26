@@ -1,0 +1,19 @@
+version: "3.8"
+services:
+    swirl:
+        build:
+            context: ./src
+            args:
+                FLAG: TSCCTF{FAKEFLAG} 
+        volumes:
+            - ./src/:/var/www/html/
+        restart: always
+        ports:
+            - 33002:80/tcp
+        storage_opt:
+          size: 1G
+        deploy:
+          resources:
+            limits:
+              cpus: '1'
+              memory: 1G
