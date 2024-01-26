@@ -100,8 +100,8 @@ results = database.get_fakelog(
 
 另外會檢查第二個回傳值是否是以 FAKE 開頭，可以使用 union attack 構造 payload
 
-![](https://hackmd.io/_uploads/rJfXoEpYn.png)
-![](https://hackmd.io/_uploads/SkIEi46Fn.png)
+![](./assets/payload1.png)
+![](./assets/payload2.png)
 
 https://github.com/Vincent550102/My-CTF-Challenge/blob/main/scist-2023-final/fakelog-sql/exploit.sh
 
