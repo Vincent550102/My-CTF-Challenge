@@ -1,5 +1,12 @@
 # My-CTF-Challenge
 
+## AIS3-preexam-2024
+
+https://ais3.org/
+| Name | Category | Solve | Keywords |
+|------------------|----------|-------------|----------|
+| Can you describe Pyjail? | Misc | 2/321 | `pyjail` `python descriptor` |
+
 ## TSCCTF-2024
 https://ctfd.tscctf.com/
 

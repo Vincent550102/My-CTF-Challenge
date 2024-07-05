@@ -1,0 +1,7 @@
+version: '3.5'
+
+services:
+  chal:
+    build: ./
+    ports:
+      - "48763:48763"
