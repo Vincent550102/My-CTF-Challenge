@@ -1,5 +1,16 @@
 # My-CTF-Challenge
 
+## scist-2023-final
+
+https://final.ctf.scist.org/challenges
+| Name | Category | Solve | Keywords |
+|------------------|----------|-------------|----------|
+| formatter | Web | 15/32 | `SSTI` |
+| parser | Web | 2/32 | `XSS` `sanitizer` |
+| parser-revenge | Web | 0/32 | `XSS` `sanitizer` |
+| pyjail1 | Misc | 23/32 | `pyjail` |
+| pyjail2 | Misc | 16/32 | `pyjail` |
+
 ## AIS3-preexam-2024
 
 https://ais3.org/

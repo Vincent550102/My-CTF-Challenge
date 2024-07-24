@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parser</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Kode Mono", monospace;
+      }
+      .btn {
+        color: white;
+        background-color: rgb(0, 143, 48);
+        font-size: 16px;
+        padding: 10px 28px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 5px;
+        margin-left: 5px;
+        box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.5);
+      }
+      .btn:hover {
+        background-color: rgb(2, 121, 41);
+      }
+      .btn:active {
+        margin-top: 10px;
+        margin-left: 10px;
+        box-shadow: 0 0 0 rgba(0, 0, 0, 1);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🌏Parser - Learn letter online!</h1>
+    <form method="post">
+      <input type="hidden" name="hostUrl" id="hostUrl" />
+      <label for="note">What letter you want to learn:</label>
+      <select name="note">
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+      </select>
+      <br />
+      <button class="btn" type="submit">Submit</button>
+    </form>
+    <br />
+    <form action="/report" method="get">
+      <button class="btn" type="submit" style="background-color: red">
+        Report to admin
+      </button>
+    </form>
+    <script>
+      hostUrl.value = window.location.origin + "/static/content.json";
+      //s
+    </script>
+  </body>
+</html>

