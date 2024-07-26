@@ -1,6 +1,6 @@
 # My-CTF-Challenge
 
-## scist-2023-final
+## scist-2024-final
 
 https://final.ctf.scist.org/challenges
 | Name | Category | Solve | Keywords |
