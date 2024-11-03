@@ -1,0 +1,32 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+<div
+    style="
+        background-color: var(--accent-bg);
+        padding: 2rem;
+        border-radius: 5px;
+        text-align: center;
+        margin-bottom: 2rem;
+    "
+>
+    <h2>Welcome to Preview Site!</h2>
+    <p>Explore websites safely and efficiently.</p>
+</div>
+{% if username %}
+<p>You are logged in as: {{ username }}</p>
+{% else %}
+<p>You are not logged in.</p>
+<p>Please login to use all features.</p>
+<a
+    href="{{ url_for('login') }}"
+    style="
+        display: inline-block;
+        background-color: var(--accent);
+        color: var(--bg);
+        padding: 0.5rem 1rem;
+        text-decoration: none;
+        border-radius: 5px;
+    "
+    >Login</a
+>
+{% endif %} {% endblock %}

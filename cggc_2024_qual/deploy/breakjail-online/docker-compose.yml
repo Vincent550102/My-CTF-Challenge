@@ -1,0 +1,11 @@
+version: "3.5"
+
+services:
+  breakjail-online:
+    build:
+      context: .
+      args:
+        FLAG: CGGC{breakpoint_is_a_biiiig_gadget_oj237rpwd3i2}
+    ports:
+      - "10003:5000"
+    restart: always

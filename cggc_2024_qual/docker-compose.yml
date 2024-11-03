@@ -1,0 +1,38 @@
+version: "3.5"
+
+services:
+  # breakjail-archived:
+  #   build: ./breakjail-archived
+  #   ports:
+  #     - "10000:10000"
+  #   restart: always
+
+  breakjail:
+    build:
+      context: ./breakjail
+      args:
+        FLAG: CGGC{breakpoint_new_feature_in_python_3.14a_can_GOOOOOTOOOOO_n23hq78weh12rb}
+    ports:
+      - "10001:10000"
+    restart: always
+
+  previewsite:
+    build:
+      context: ./previewsite
+      args:
+        FLAG: CGGC{open_redirect_to_your_local_file_2893hrgiubf3wq1}
+    environment:
+      - DOMAIN=http://previewsite/
+    volumes:
+      - ./previewsite/app/:/app
+    ports:
+      - "10002:80"
+    restart: always
+  breakjail-online:
+    build:
+      context: ./breakjail-online
+      args:
+        FLAG: CGGC{breakpoint_is_a_biiiig_gadget_oj237rpwd3i2}
+    ports:
+      - "10003:5000"
+    restart: always

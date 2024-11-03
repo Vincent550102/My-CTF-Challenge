@@ -1,5 +1,14 @@
 # My-CTF-Challenge
 
+## cggc-2024-qual
+
+https://cggc.nchc.org.tw/
+| Name | Category | Solve | Keywords |
+|------------------|----------|-------------|----------|
+| Preview Site 🔍 | Web | 56/64 | `open redirect` `LFR` |
+| Breakjail ⛓️ | Misc | 20/64 | `pyjail` `sanitizer` |
+| Breakjail Online 🛜 | Web | 13/64 | `pyjail` `SSTI` |
+
 ## scist-2024-final
 
 https://final.ctf.scist.org/challenges

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{% block title %}Preview Site{% endblock %}</title>
+        <link
+            rel="stylesheet"
+            href="https://cdn.simplecss.org/simple.min.css"
+        />
+        <style>
+            nav {
+                margin-bottom: 1rem;
+            }
+            nav ul {
+                padding: 0;
+                list-style-type: none;
+            }
+            nav ul li {
+                display: inline;
+                margin-right: 1rem;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Preview Site</h1>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li><a href="{{ url_for('fetch') }}">Send Request</a></li>
+                    {% if session.get('username') %}
+                    <li>Welcome, {{ session.get('username') }}</li>
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                    {% else %}
+                    <li><a href="{{ url_for('login') }}">Login</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+        <main>
+            {% with messages = get_flashed_messages() %} {% if messages %} {%
+            for message in messages %}
+            <p><mark>{{ message }}</mark></p>
+            {% endfor %} {% endif %} {% endwith %} {% block content %}{%
+            endblock %}
+        </main>
+        <footer>
+            <p>Vincent55 in CGGC.</p>
+        </footer>
+    </body>
+</html>

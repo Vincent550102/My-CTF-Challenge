@@ -1,0 +1,11 @@
+version: "3.5"
+
+services:
+  breakjail:
+    build:
+      context: .
+      args:
+        FLAG: CGGC{breakpoint_new_feature_in_python_3.14a_can_GOOOOOTOOOOO_n23hq78weh12rb}
+    ports:
+      - "10001:10000"
+    restart: always

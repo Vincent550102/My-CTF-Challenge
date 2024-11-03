@@ -1,0 +1,15 @@
+version: "3.5"
+
+services:
+  previewsite:
+    build:
+      context: .
+      args:
+        FLAG: CGGC{open_redirect_to_your_local_file_2893hrgiubf3wq1}
+    environment:
+      - DOMAIN=http://previewsite/
+    volumes:
+      - ./app/:/app
+    ports:
+      - "10002:80"
+    restart: always
