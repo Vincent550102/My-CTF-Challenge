@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Register - SQL Injection Payload Generator</title>
+        <link
+            rel="stylesheet"
+            href="https://cdn.simplecss.org/simple.min.css"
+        />
+    </head>
+    <body>
+        <h1>Register</h1>
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" required />
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" required />
+        </div>
+        <button class="btn" onclick="register()">Register</button>
+        <p>
+            Already have an account? <a href="{{ url_for('login') }}">Login</a>
+        </p>
+
+        <script>
+            function register() {
+                const username = document.getElementById("username").value;
+                const password = document.getElementById("password").value;
+
+                fetch("/register", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        password: password,
+                    }),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.message) {
+                            window.location.href = "/login";
+                        } else {
+                            alert(data.error);
+                        }
+                    });
+            }
+        </script>
+    </body>
+</html>

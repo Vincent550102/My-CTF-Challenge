@@ -22,7 +22,6 @@ def showip():
 
     if any([x in "._.|||" for x in q]) or len(q) > 88:
         return "Too long for me :/ my payload less than 73 chars"
-    print(request.query_string, flush=True)
 
     res = render_template_string(f"{{{{{q}}}}}",
                                  # TODO: just for debugging, remove this in production

@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Markdown Page - View Note</title>
+        <meta
+            http-equiv="Content-Security-Policy"
+            content="connect-src 'self';"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.simplecss.org/simple.min.css"
+        />
+    </head>
+    <body>
+        <h1>Note Content</h1>
+        {% autoescape false %}
+        <div>{{ note }}</div>
+        {% endautoescape %}
+        <br />
+        <a href="{{ url_for('index') }}">Back to Notes</a>
+    </body>
+</html>

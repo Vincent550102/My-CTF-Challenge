@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Markdown Note</title>
+        <link
+            rel="stylesheet"
+            href="https://cdn.simplecss.org/simple.min.css"
+        />
+    </head>
+    <body>
+        <h1>🌏 Markdown Note</h1>
+
+        <form method="post">
+            <textarea name="note" rows="4" cols="50" id="note"></textarea><br />
+            <button class="btn" type="submit" id="submit">Submit Note</button>
+        </form>
+
+        <div class="note-list">
+            <h2>Your Notes:</h2>
+            {% for note in notes %}
+            <div class="note-item">
+                <div>
+                    <a
+                        href="{{ url_for('view_note', note_id=note['note_id']) }}"
+                    >
+                        {{ note['content'][:50] }}...
+                    </a>
+                </div>
+                <div class="note-date">{{ note['created_at'] }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </body>
+</html>

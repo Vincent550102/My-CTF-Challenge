@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Login - SQL Injection Payload Generator</title>
+        <link
+            rel="stylesheet"
+            href="https://cdn.simplecss.org/simple.min.css"
+        />
+    </head>
+    <body>
+        <header>
+            <h1>Login</h1>
+        </header>
+
+        <main>
+            <article>
+                <form onsubmit="return false;">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" required />
+
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" required />
+
+                    <button onclick="login()">Login</button>
+                </form>
+
+                <p>
+                    Don't have an account?
+                    <a href="{{ url_for('register') }}">Register</a>
+                </p>
+            </article>
+        </main>
+
+        <script>
+            function login() {
+                const username = document.getElementById("username").value;
+                const password = document.getElementById("password").value;
+
+                fetch("/login", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        password: password,
+                    }),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.message) {
+                            window.location.href = "/";
+                        } else {
+                            alert(data.error);
+                        }
+                    });
+            }
+        </script>
+    </body>
+</html>

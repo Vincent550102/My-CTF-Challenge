@@ -1,5 +1,14 @@
 # My-CTF-Challenge
 
+## cggc-2024-final
+
+https://cggc.nchc.org.tw/
+| Name | Category | Solve | Keywords |
+|------------------|----------|-------------|----------|
+| 💉 SQLi Payload Generator | Web | 8/12 | `nosql injection` |
+| 📒 Markdown Note | Web | 3/12 | `XSS` |
+| 😈 Safe Eval | Misc | 1/12 | `pyjail` |
+
 ## cggc-2024-qual
 
 https://cggc.nchc.org.tw/

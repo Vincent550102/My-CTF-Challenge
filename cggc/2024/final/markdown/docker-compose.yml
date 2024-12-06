@@ -1,0 +1,25 @@
+version: "3.5"
+
+services:
+  markdown:
+    image: tiangolo/uwsgi-nginx-flask:python3.10
+    volumes:
+      - ./app/:/app
+    environment:
+      - BOT_HOST=markdown-bot
+      - BOT_PORT=8080
+      - SITE_URL=http://markdown/
+    ports:
+      - 8024:80/tcp
+    restart: always
+
+  # edit from https://github.com/splitline/My-CTF-Challenges/blob/master/hitcon-quals/2022/web/sdm/docker-compose.yml
+  markdown-bot:
+    build:
+      context: ./bot
+    environment:
+      - PORT=8080
+      - REPORT_HOST=markdown
+      - SITE_URL=http://markdown/
+      - FLAG=CGGC{markdown_parser_is_hard_to_write_q3iu5rhqw}
+    restart: always

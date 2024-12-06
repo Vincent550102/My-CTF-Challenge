@@ -1,0 +1,12 @@
+version: "3.5"
+
+services:
+  jail:
+    build:
+      context: .
+      args:
+        FLAG: CGGC{lambda_code_cant_detect___and_a_lot_of_things_can_replace_the_blacklist}
+    ports:
+      - "10000:10000"
+    read_only: true
+    restart: always

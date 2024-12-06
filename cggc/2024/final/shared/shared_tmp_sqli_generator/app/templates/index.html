@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>SQL Injection Payload Generator</title>
+        <link
+            rel="stylesheet"
+            href="https://cdn.simplecss.org/simple.min.css"
+        />
+        <style>
+            /* 一些自定義樣式來補充 Simple.css */
+            .favorite-badge {
+                background: #ffd700;
+                color: #000;
+                padding: 0.2rem 0.5rem;
+                border-radius: 4px;
+                display: inline-block;
+                margin-bottom: 1rem;
+            }
+
+            .history-item {
+                border: 1px solid var(--border);
+                padding: 1rem;
+                margin: 1rem 0;
+                border-radius: var(--border-radius);
+            }
+
+            .favorite-item {
+                background: var(--accent-bg);
+            }
+
+            .header-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .user-info {
+                text-align: right;
+            }
+
+            .copy-container {
+                display: flex;
+                gap: 1rem;
+                align-items: center;
+            }
+
+            pre {
+                margin: 0;
+                flex-grow: 1;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="header-container">
+                <h1>SQL Injection Payload Generator</h1>
+                <div class="user-info">
+                    <p>Welcome, {{ username }}!</p>
+                    <a href="{{ url_for('logout') }}" role="button">Logout</a>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <article>
+                <form onsubmit="return false;">
+                    <label for="field">Target Column:</label>
+                    <input
+                        type="text"
+                        id="field"
+                        name="field"
+                        placeholder="e.g., username"
+                    />
+
+                    <label for="payload-type">Payload Type:</label>
+                    <select id="payload-type">
+                        {% for type in payload_types %}
+                        <option value="{{ type }}">{{ type|title }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <label for="value">Custom Value:</label>
+                    <input
+                        type="text"
+                        id="value"
+                        name="value"
+                        placeholder="Enter value (optional)"
+                    />
+
+                    <button onclick="generatePayload()">
+                        Generate Payload
+                    </button>
+                </form>
+            </article>
+
+            <article>
+                <h2>Generated Payload:</h2>
+                <div class="copy-container">
+                    <pre id="payload-output"></pre>
+                    <button onclick="copyPayload()">Copy</button>
+                </div>
+            </article>
+
+            <article>
+                <h2>History</h2>
+                {% for item in history %}
+                <div
+                    class="history-item {% if item.favorite %}favorite-item{% endif %}"
+                >
+                    {% if item.favorite %}
+                    <div class="favorite-badge">★ Favorite</div>
+                    {% endif %}
+                    <p><strong>Type:</strong> {{ item.payload_type|title }}</p>
+                    <p><strong>Field:</strong> {{ item.field }}</p>
+                    <p>
+                        <strong>Payload:</strong> {{ item.generated_payload }}
+                    </p>
+                    <p>
+                        <strong>Created:</strong> {{
+                        item.created_at.strftime('%Y-%m-%d %H:%M:%S') }}
+                    </p>
+                    <button onclick="toggleFavorite('{{ item._id }}')">
+                        {% if item.favorite %} Remove from Favorites {% else %}
+                        Add to Favorites {% endif %}
+                    </button>
+                </div>
+                {% endfor %}
+            </article>
+        </main>
+
+        <script>
+            function generatePayload() {
+                const field = document.getElementById("field").value;
+                const payloadType =
+                    document.getElementById("payload-type").value;
+                const value = document.getElementById("value").value;
+
+                fetch("/generate", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        field: field,
+                        type: payloadType,
+                        value: value,
+                    }),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        document.getElementById("payload-output").textContent =
+                            data.payload;
+                        window.location.reload();
+                    });
+            }
+
+            function copyPayload() {
+                const payload =
+                    document.getElementById("payload-output").textContent;
+                navigator.clipboard.writeText(payload).then(() => {
+                    alert("Payload copied to clipboard!");
+                });
+            }
+
+            function toggleFavorite(historyId) {
+                fetch("/favorite", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        history_id: { _id: historyId },
+                    }),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        window.location.reload();
+                    });
+            }
+        </script>
+    </body>
+</html>

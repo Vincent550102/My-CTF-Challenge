@@ -1,0 +1,12 @@
+version: "3.5"
+
+services:
+  jail:
+    build:
+      context: .
+      args:
+        FLAG: CGGC{fakeflag}
+    ports:
+      - "10000:10000"
+    read_only: true
+    restart: always
