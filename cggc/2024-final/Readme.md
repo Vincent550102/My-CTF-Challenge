@@ -334,7 +334,7 @@ print(eval(code_obj, {"__builtins__": {}}, {}))
 {lambda:''.__class__.__base__}.pop()()
 ```
 
-`[]` 的部分會讓我們在取陣列元素的時候遇到困難，像是 `object.__subclasses__()[124]` 的時候就會有問題，但可以用 `__getitem__(124)` 來繞過，不過這就會佔用到 `(blablabla)` 的數量，因此我們直接 for loop comprehension 來繞過，像是：
+`[]` 的部分會讓我們在取串列元素的時候遇到困難，像是 `object.__subclasses__()[124]` 的時候就會有問題，但可以用 `__getitem__(124)` 來繞過，不過這就會佔用到 `(blablabla)` 的數量，因此我們直接 for loop comprehension 來繞過，像是：
 
 ```python
 v:={x for x in ''.__class__.__base__.__subclasses__() if 'verify' in x.__name__}.pop()
