@@ -3,6 +3,7 @@
 ## 💉 SQLi Payload Generator
 
 Category: Web
+
 Solves: 8/12
 
 
@@ -109,6 +110,7 @@ print(flag)
 ## 📒 Markdown Note
 
 Category: Web
+
 Solves: 3/12
 
 這題是個 XSS 挑戰，自己寫了一個 markdown parser，大概長這樣：
@@ -281,6 +283,7 @@ s.post(
 ## 😈 Safe Eval
 
 Category: Misc
+
 Solves: 1/12
 
 pyjail 題，題目很短，題目敘述已說明哪些東西可以用哪些不行：
