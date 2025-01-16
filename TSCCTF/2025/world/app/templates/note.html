@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Beautiful World</title>
+        <link
+            rel="stylesheet"
+            href="https://cdn.simplecss.org/simple.min.css"
+        />
+        <meta
+            http-equiv="Content-Security-Policy"
+            content="connect-src 'self';"
+        />
+    </head>
+    <body>
+        <h1>🌞 Beautiful World - View</h1>
+        <s>a beautiful world is full of strikethrough.</s>
+
+        {% autoescape false %}
+        <div>{{ note }}</div>
+        {% endautoescape %}
+
+        <a href="{{ url_for('index') }}">Back to Pages</a>
+    </body>
+</html>

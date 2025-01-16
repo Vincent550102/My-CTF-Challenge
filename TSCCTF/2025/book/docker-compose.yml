@@ -1,0 +1,25 @@
+version: "3.5"
+
+services:
+  book:
+    image: tiangolo/uwsgi-nginx-flask:python3.12
+    volumes:
+      - ./app/:/app
+    environment:
+      - BOT_HOST=book-bot
+      - BOT_PORT=8080
+      - SITE_URL=http://book/
+    ports:
+      - 8000:80/tcp
+    restart: always
+
+  # edit from https://github.com/splitline/My-CTF-Challenges/blob/master/hitcon-quals/2022/web/sdm/docker-compose.yml
+  book-bot:
+    build:
+      context: ./bot
+    environment:
+      - PORT=8080
+      - REPORT_HOST=book
+      - SITE_URL=http://book/
+      - FLAG=TSC{CLOBBERING_TIME!!!!!_ui2qjwu3wesixz}
+    restart: always

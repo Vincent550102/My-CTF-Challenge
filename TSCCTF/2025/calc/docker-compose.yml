@@ -1,0 +1,12 @@
+version: "3.5"
+
+services:
+  calc:
+    build:
+      context: .
+      args:
+        FLAG: TSC{PEP-3131_is_a_friendly_PEP_for_pyjai1er_nhsdcuhq6}
+    ports:
+      - "8003:10000"
+    read_only: true
+    restart: always

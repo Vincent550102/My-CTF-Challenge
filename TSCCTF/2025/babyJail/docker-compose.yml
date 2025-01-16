@@ -1,0 +1,12 @@
+version: "3.5"
+
+services:
+  babyjail:
+    build:
+      context: .
+      args:
+        FLAG: TSC{just_a_classic_nobuiltins_pyjail_for_baby}
+    ports:
+      - "8002:10000"
+    read_only: true
+    restart: always

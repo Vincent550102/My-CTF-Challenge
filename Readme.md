@@ -1,5 +1,19 @@
 # My-CTF-Challenge
 
+## TSCCTF-2024
+
+https://ctftime.org/event/2598/
+
+| Name               | Category | Solve  | Keywords                             |
+| ------------------ | -------- | ------ | ------------------------------------ |
+| book               | Web      | 21/509 | `dom clobbering`                     |
+| Beautiful World    | Web      | 19/509 | `bypass beautfulsoup sanitize` `XSS` |
+| BabyJail           | Misc     | 93/509 | `pyjail`                             |
+| calc               | Misc     | 37/509 | `pyjail` `PEP3131`                   |
+| BabyJail - Revenge | Misc     | 3/509  | `pyjail` `frame switching`           |
+
+
+
 ## cggc-2024-final
 
 https://cggc.nchc.org.tw/

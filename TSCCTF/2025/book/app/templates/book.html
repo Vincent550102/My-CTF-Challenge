@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+    <head>
+        <title>View Book</title>
+        <link
+            rel="stylesheet"
+            href="https://cdn.simplecss.org/simple.min.css"
+        />
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.2/purify.min.js"
+            integrity="sha512-aMwmSY1jtPTUuu81C/rDUHoj2IyPpqqSX6N+efBFVFIe5nV4ZsKebsEWDUxsVdDMy3XVhY4TsZ3WHgXmhSufjw=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+        <style>
+            .book-container {
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+                background: #fff;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                border-radius: 5px;
+            }
+            .book-title {
+                font-size: 2em;
+                text-align: center;
+                border-bottom: 2px solid #333;
+                padding-bottom: 10px;
+                margin-bottom: 20px;
+            }
+            .book-content {
+                font-family: "Georgia", serif;
+                line-height: 1.8;
+                font-size: 1.2em;
+                padding: 20px;
+                background: #fafafa;
+                border: 1px solid #eee;
+                border-radius: 3px;
+            }
+            .nav-links {
+                text-align: center;
+                margin-top: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="book-container">
+            <h1 class="book-title" id="title"></h1>
+            <div class="book-content" id="content"></div>
+            <div class="nav-links">
+                <a href="{{ url_for('index') }}">📚 Return to Index</a>
+            </div>
+        </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const urlParams = new URLSearchParams(window.location.search);
+                const title = atob(urlParams.get("title"));
+                const content = atob(urlParams.get("content"));
+                document.getElementById("title").innerHTML =
+                    DOMPurify.sanitize(title);
+                if (typeof config !== "undefined" && config.DEBUG) {
+                    document.getElementById("content").innerHTML = content;
+                } else {
+                    document.getElementById("content").innerHTML =
+                        DOMPurify.sanitize(content);
+                }
+            });
+        </script>
+    </body>
+</html>

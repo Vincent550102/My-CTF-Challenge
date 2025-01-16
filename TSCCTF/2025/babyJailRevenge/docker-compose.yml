@@ -1,0 +1,12 @@
+version: "3.5"
+
+services:
+  babyjail-revenge:
+    build:
+      context: .
+      args:
+        FLAG: TSC{frame_switching_to_the_moooo0o0n!_tuygv2jnsvnjs}
+    ports:
+      - "8004:10000"
+    read_only: true
+    restart: always

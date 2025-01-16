@@ -1,0 +1,26 @@
+version: "3.5"
+
+services:
+  world:
+    build:
+      context: ./app
+    volumes:
+      - ./app/:/app
+    environment:
+      - BOT_HOST=world-bot
+      - BOT_PORT=8080
+      - SITE_URL=http://world/
+    ports:
+      - 8001:80/tcp
+    restart: always
+
+  # edit from https://github.com/splitline/My-CTF-Challenges/blob/master/hitcon-quals/2022/web/sdm/docker-compose.yml
+  world-bot:
+    build:
+      context: ./bot
+    environment:
+      - PORT=8080
+      - REPORT_HOST=world
+      - SITE_URL=http://world/
+      - FLAG=TSC{Dont_use_Beautifulsoup_to_sanitise_HTML_u2gqwiewgyqwas}
+    restart: always
