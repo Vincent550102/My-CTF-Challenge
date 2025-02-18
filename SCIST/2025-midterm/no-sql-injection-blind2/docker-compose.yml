@@ -1,0 +1,20 @@
+version: "3.5"
+
+services:
+  no-sql-injection-blind2:
+    build:
+      context: .
+    volumes:
+      - ./app/:/app
+    ports:
+      - 31001:80/tcp
+    depends_on:
+      - mongo
+    restart: always
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: db
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: oihuygh32rei

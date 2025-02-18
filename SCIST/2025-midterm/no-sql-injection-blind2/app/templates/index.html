@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>NoSQL Blind Injection CTF Challenge 2!</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@700&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            body {
+                font-family: "Noto Sans Mono", monospace;
+            }
+            .btn {
+                color: white;
+                background-color: rgb(0, 143, 48);
+                font-size: 16px;
+                padding: 10px 28px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                margin-top: 5px;
+                margin-left: 5px;
+                box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.5);
+            }
+            .btn:hover {
+                background-color: rgb(2, 121, 41);
+            }
+            .btn:active {
+                margin-top: 10px;
+                margin-left: 10px;
+                box-shadow: 0 0 0 rgba(0, 0, 0, 1);
+            }
+        </style>
+    </head>
+    <body>
+        <h2>
+            NoSQL Blind Injection Login Form | <a href="?debug=1">main.py</a>
+        </h2>
+        <h3>Notice that flag contain unicode!</h3>
+
+        <form id="loginForm">
+            Username: <input type="text" name="username" id="username" /><br />
+            Password:
+            <input type="password" name="password" id="password" /><br />
+            <input class="btn" type="button" value="Login" onclick="login()" />
+        </form>
+        <div id="response"></div>
+
+        <script>
+            function login() {
+                const username = document.getElementById("username").value;
+                const password = document.getElementById("password").value;
+
+                fetch("/login", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ username, password }),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        document.getElementById("response").innerText =
+                            data.message || data.error;
+                    })
+                    .catch((error) => {
+                        console.error("Error:", error);
+                    });
+            }
+        </script>
+    </body>
+</html>

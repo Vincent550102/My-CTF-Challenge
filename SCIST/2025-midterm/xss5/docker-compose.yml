@@ -1,0 +1,24 @@
+version: "3.5"
+
+services:
+  xss5:
+    image: tiangolo/uwsgi-nginx-flask:python3.10
+    volumes:
+      - ./app/:/app
+    environment:
+      - BOT_HOST=xss5-bot
+      - BOT_PORT=8080
+    ports:
+      - 31002:80/tcp
+    restart: always
+
+  # edit from https://github.com/splitline/My-CTF-Challenges/blob/master/hitcon-quals/2022/web/sdm/docker-compose.yml
+  xss5-bot:
+    build:
+      context: ./bot
+    environment:
+      - PORT=8080
+      - REPORT_HOST=xss5
+      - SITE_URL=http://xss5/
+      - FLAG=SCIST{Leaking_the_flag_to0o0o_th333_moo00o0n}
+    restart: always

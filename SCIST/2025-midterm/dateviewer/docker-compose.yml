@@ -1,0 +1,12 @@
+version: "3.5"
+
+services:
+  jail:
+    build:
+      context: .
+      args:
+        FLAG: SCIST{datetime_can_also_get_sys!}
+    ports:
+      - "31003:10000"
+    read_only: true
+    restart: always

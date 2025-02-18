@@ -1,0 +1,11 @@
+version: "3.5"
+
+services:
+  digtools-waf4:
+    build:
+      context: .
+      args:
+        FLAG: SCIST{command_injection_has_somany_combinations!}
+    ports:
+      - 31000:80/tcp
+    restart: always

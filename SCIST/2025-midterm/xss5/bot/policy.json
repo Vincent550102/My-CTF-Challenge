@@ -1,0 +1,1 @@
+{ "URLAllowlist": ["xss5"], "URLBlocklist": ["*"] }
