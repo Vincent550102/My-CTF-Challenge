@@ -1,0 +1,12 @@
+version: "3.5"
+
+services:
+  jail:
+    build:
+      context: .
+      args:
+        FLAG: AIS3{overwrite_the_operator_dunder_method_to_call_without_()}
+    ports:
+      - "14452:10000"
+    read_only: true
+    restart: always
