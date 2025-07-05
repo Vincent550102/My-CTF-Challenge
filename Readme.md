@@ -1,4 +1,11 @@
 # My-CTF-Challenge
+## AIS3-preexam-2025
+
+https://ais3.org/
+| Name | Category | Solve | Keywords |
+|------------------|----------|-------------|----------|
+| nocall 🈲📞 | Misc | 5/389 | `pyjail` |
+| nocall revenge 🈲📞🆙 | Misc | 1/389 | `pyjail` |
 
 ## TSCCTF-2024
 
