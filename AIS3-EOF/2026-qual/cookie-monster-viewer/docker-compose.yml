@@ -1,0 +1,9 @@
+name: eof-web-cookie-monster-viewer
+
+services:
+  web:
+    build: .
+    ports:
+      - "9000:80"
+    restart: unless-stopped
+    isolation: process

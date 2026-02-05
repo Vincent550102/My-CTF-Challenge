@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CookieMonster Viewer</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('/static/images/bg.png');
+            background-size: cover;
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: #e2e8f0;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 2.5rem;
+            color: #f1c40f;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        h1 span {
+            color: #ecf0f1;
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.8rem;
+            color: #aAB4BE;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.2);
+            color: #fff;
+            font-family: 'Lato', sans-serif;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        select:focus,
+        input:focus {
+            outline: none;
+            border-color: #f1c40f;
+            background: rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 20px rgba(241, 196, 15, 0.1);
+        }
+
+        button {
+            width: 100%;
+            padding: 1.2rem;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #f1c40f 0%, #f39c12 100%);
+            color: #1a1a2e;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 1rem;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(243, 156, 18, 0.3);
+            filter: brightness(1.1);
+        }
+
+        .preview-area {
+            min-height: 900px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-style: italic;
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 900px;
+            border: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            /* Hide scrollbars */
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            color: #e2e8f0;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Cookies <span>&</span> Cream Viewer</h1>
+
+        <div class="card">
+            <div class="form-group">
+                <label for="template">Select View</label>
+                <select id="template">
+                    <option value="lake">Lake Serenity</option>
+                    <option value="mountain">Mountain Peak</option>
+                    <option value="tree">Ancient Tree</option>
+                    <option value="meat">Gourmet Feast</option>
+                    <option value="flower">Floral Bloom</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="username">Guest Name</label>
+                <input type="text" id="username" placeholder="Enter name...">
+            </div>
+
+            <button onclick="preview()">Generate Preview</button>
+        </div>
+
+        <div class="card">
+            <h2>Live Preview</h2>
+            <div class="preview-area">
+                <div id="placeholder" style="z-index: 1;">Select a template to view the magic...</div>
+                <iframe id="previewFrame" name="previewFrame" sandbox="allow-same-origin allow-scripts"
+                    scrolling="no"></iframe>
+            </div>
+        </div>
+
+        <footer style="text-align: center; margin-top: 2rem; color: #64748b; font-size: 0.8rem; letter-spacing: 1px;">
+            POWERED BY {{ os_info }}
+        </footer>
+    </div>
+
+    <script>
+        async function preview() {
+            const template = document.getElementById('template').value;
+            const username = document.getElementById('username').value || 'Guest';
+            const frame = document.getElementById('previewFrame');
+            const placeholder = document.getElementById('placeholder');
+
+            placeholder.style.display = 'none';
+            frame.style.opacity = '0.5';
+
+            const response = await fetch('/api/preview', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    url: `http://localhost/api/templates/${template}`,
+                    username: username
+                })
+            });
+
+            const html = await response.text();
+            frame.srcdoc = html;
+            frame.style.opacity = '1';
+        }
+    </script>
+</body>
+
+</html>
