@@ -1,4 +1,21 @@
 # My-CTF-Challenge
+
+
+## AIS3-EOF-final-2026
+
+https://ais3.org/
+| Name | Category | Solve | Keywords |
+|------------------|----------|-------------|----------|
+| Plants | KoH |  | `game` |
+
+
+## AIS3-EOF-qual-2026
+
+https://ais3.org/
+| Name | Category | Solve | Keywords |
+|------------------|----------|-------------|----------|
+| CookieMonsterViewer | Web |  | `web` `worstFit` `format string` |
+
 ## AIS3-preexam-2025
 
 https://ais3.org/
