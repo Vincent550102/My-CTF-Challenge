@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="layout">
+  <aside class="panel profile-card">
+    <div class="hero-band"></div>
+    <div class="panel-pad">
+      <img class="avatar profile-avatar" src="/media?file=uploads/default.png" alt="avatar">
+      <h2>Recruiter Labs</h2>
+      <p class="muted small">Local recruiter workspace</p>
+      <div class="stat-row"><span>Candidate</span><strong>{{ workbook.candidate.name }}</strong></div>
+      {% for signal in workbook.signals %}
+      <div class="stat-row"><span>{{ signal.label }}</span><strong>{{ signal.value }}</strong></div>
+      {% endfor %}
+    </div>
+  </aside>
+  <section class="panel">
+    <div class="panel-pad">
+      <h1>Recruiter Labs</h1>
+      <p>Recruiter Labs formula preview for local recruiters.</p>
+      <p class="muted">Available to @{{ trusted_domain }} recruiters only.</p>
+      <div class="lab-header">
+        <div>
+          <h2>{{ workbook.candidate.name }}</h2>
+          <p class="muted small">{{ workbook.candidate.headline }} · {{ workbook.candidate.location }}</p>
+        </div>
+      </div>
+      <div class="lab-grid">
+        <div class="lab-box">
+          <h2>Scorecard Signals</h2>
+          {% for signal in workbook.signals %}
+          <div class="stat-row"><span>{{ signal.name }}</span><strong>{{ signal.value }}</strong></div>
+          {% endfor %}
+        </div>
+        <div class="lab-box">
+          <h2>Profile Fields</h2>
+          {% for item in workbook.profile_fields %}
+          <div class="field-row"><code>{{ item.field }}</code><span>{{ item.value }}</span></div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="lab-box">
+        <h2>Review Workflow</h2>
+        {% for item in workbook.workflow %}
+        <div class="field-row"><span>{{ item.label }}</span><code>{{ item.value }}</code></div>
+        {% endfor %}
+      </div>
+      <div class="lab-box">
+        <h2>Formula Reference</h2>
+        {% for item in workbook.formula_reference %}
+        <div class="field-row"><span>{{ item.label }}</span><code>{{ item.value }}</code></div>
+        {% endfor %}
+      </div>
+      <p class="small muted">{{ formula_help }}</p>
+      <div class="composer-tools">
+        {% for example in workbook.examples %}
+        <span class="snippet-pill">{{ example }}</span>
+        {% endfor %}
+      </div>
+      <form method="post">
+        <p><input name="formula" size="72" placeholder="score"></p>
+        <p><button type="submit">Preview formula</button></p>
+      </form>
+      {% if normalized_formula is not none %}
+      <h2>Formula Sent to Preview</h2><pre>{{ normalized_formula }}</pre>
+      {% endif %}
+      {% if formula_result is not none %}
+      <h2>Candidate Ranking Preview</h2><pre>{{ formula_result }}</pre>
+      {% endif %}
+      {% if formula_error %}
+      <h2>Candidate Ranking Preview</h2><pre>formula error: {{ formula_error }}</pre>
+      {% endif %}
+      <p><a href="/feed">Back to feed</a></p>
+    </div>
+  </section>
+  <aside class="panel right-rail">
+    <div class="panel-pad">
+      <h2>Lab status</h2>
+      <p class="muted small">Candidate ranking preview is available for local recruiters.</p>
+      <div class="list-links">
+        <a href="/feed">Feed</a>
+        <a href="/compose">Post templates</a>
+      </div>
+    </div>
+  </aside>
+</section>
+{% endblock %}

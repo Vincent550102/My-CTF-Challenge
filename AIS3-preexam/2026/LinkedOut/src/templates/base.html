@@ -1,0 +1,342 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }}</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #f3f2ef;
+      color: #191919;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+    a { color: #0a66c2; text-decoration: none; font-weight: 600; }
+    a:hover { text-decoration: underline; }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      height: 52px;
+      background: #fff;
+      border-bottom: 1px solid #d6d6d6;
+    }
+    .topbar-inner {
+      max-width: 1128px;
+      height: 52px;
+      margin: 0 auto;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #0a66c2;
+      font-size: 21px;
+      font-weight: 700;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 5px;
+      background: #0a66c2;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .search {
+      flex: 1;
+      max-width: 360px;
+      height: 34px;
+      border: 0;
+      border-radius: 4px;
+      background: #eef3f8;
+      color: #4b5563;
+      padding: 0 12px;
+    }
+    .nav {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: #666;
+      font-size: 13px;
+    }
+    .nav a { color: #555; font-weight: 600; }
+    .shell {
+      max-width: 1128px;
+      margin: 20px auto 48px;
+      padding: 0 16px;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 236px minmax(0, 1fr) 280px;
+      gap: 16px;
+      align-items: start;
+    }
+    .panel {
+      background: #fff;
+      border: 1px solid #d6d6d6;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .panel-pad { padding: 16px; }
+    .hero-band {
+      height: 58px;
+      background: linear-gradient(135deg, #0a66c2, #5c6f7c);
+    }
+    .avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      background: #fff;
+      object-fit: cover;
+      display: block;
+    }
+    .profile-avatar { margin: -36px auto 10px; }
+    .avatar-initials {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0a66c2;
+      font-weight: 700;
+      font-size: 20px;
+    }
+    .profile-card { text-align: center; }
+    .profile-card h2, .profile-card p { margin: 0; }
+    .muted { color: #666; }
+    .small { font-size: 12px; }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+    p { margin: 0 0 12px; }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .btn, button {
+      min-height: 34px;
+      border: 1px solid #0a66c2;
+      border-radius: 18px;
+      background: #0a66c2;
+      color: #fff;
+      padding: 7px 16px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn.secondary {
+      background: #fff;
+      color: #0a66c2;
+    }
+    input, textarea {
+      width: 100%;
+      border: 1px solid #b9b9b9;
+      border-radius: 4px;
+      background: #fff;
+      color: #191919;
+      padding: 10px 12px;
+      font: inherit;
+    }
+    textarea { min-height: 150px; resize: vertical; }
+    form p { margin-bottom: 12px; }
+    pre {
+      margin: 10px 0 14px;
+      padding: 12px;
+      overflow: auto;
+      border-radius: 6px;
+      background: #f7f7f7;
+      border: 1px solid #e2e2e2;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-size: 13px;
+    }
+    .auth-wrap {
+      max-width: 420px;
+      margin: 56px auto;
+    }
+    .feed-card-header {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      border-bottom: 1px solid #e6e6e6;
+      padding: 14px 16px;
+    }
+    .feed-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #fff;
+      border: 1px solid #d6d6d6;
+    }
+    .post-box {
+      display: block;
+      width: 100%;
+      min-height: 42px;
+      border: 1px solid #b9b9b9;
+      border-radius: 21px;
+      padding: 10px 16px;
+      color: #555;
+      background: #fff;
+    }
+    .composer-shell {
+      display: grid;
+      gap: 14px;
+    }
+    .composer-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .composer-author strong { display: block; }
+    .composer-textarea {
+      min-height: 190px;
+      border: 0;
+      padding: 4px 0;
+      font-size: 18px;
+      line-height: 1.45;
+      outline: none;
+    }
+    .composer-tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding-top: 10px;
+      border-top: 1px solid #eee;
+    }
+    .snippet-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      border: 1px solid #c9d8e8;
+      border-radius: 16px;
+      background: #f6fafd;
+      color: #0a66c2;
+      padding: 5px 10px;
+      font-family: monospace;
+      font-size: 12px;
+    }
+    .preview-post {
+      margin-top: 16px;
+      border-top: 1px solid #eee;
+      padding-top: 14px;
+    }
+    .preview-post pre {
+      border: 0;
+      background: #fff;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      white-space: pre-wrap;
+    }
+    .lab-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0 16px;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+      margin: 12px 0 16px;
+    }
+    .lab-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .lab-box {
+      border: 1px solid #e2e2e2;
+      border-radius: 6px;
+      padding: 12px;
+      margin-bottom: 12px;
+      background: #fff;
+    }
+    .field-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 8px 0;
+      border-top: 1px solid #f0f0f0;
+    }
+    .field-row:first-of-type { border-top: 0; }
+    code {
+      color: #333;
+      background: #f7f7f7;
+      border: 1px solid #e5e5e5;
+      border-radius: 4px;
+      padding: 2px 5px;
+      font-family: monospace;
+      font-size: 12px;
+    }
+    .list-links {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 8px 0;
+      border-top: 1px solid #eee;
+    }
+    .notice {
+      color: #8a3a00;
+      background: #fff4e5;
+      border: 1px solid #f5d6ad;
+      border-radius: 6px;
+      padding: 10px 12px;
+      margin-bottom: 14px;
+    }
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      .right-rail { display: none; }
+      .search { display: none; }
+      .nav { gap: 10px; font-size: 12px; }
+      .lab-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="/"><span class="brand-mark">lo</span><span>LinkedOut</span></a>
+    <input class="search" value="Search people, posts, jobs" aria-label="Search" readonly>
+    <nav class="nav">
+      <a href="/feed">Home</a>
+      <a href="/compose">Post</a>
+      <a href="/recruiter/labs">Labs</a>
+      <a href="/logout">Sign out</a>
+    </nav>
+  </div>
+</header>
+<main class="shell">
+  {% block content %}{% endblock %}
+</main>
+</body>
+</html>

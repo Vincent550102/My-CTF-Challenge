@@ -1,0 +1,50 @@
+name: linkedout-instancer
+
+services:
+  instancer:
+    build:
+      context: ./instancer
+    ports:
+      - "35000:35000"
+    environment:
+      CTFD_URL: https://pre-exam.ais3.org/
+      CTFD_ADMIN_TOKEN: ${CTFD_ADMIN_TOKEN:-}
+      CTFD_SITE_PASSWORD: ${CTFD_SITE_PASSWORD:-}
+      TRUST_PROXY: ${TRUST_PROXY:-false}
+      PUBLIC_DOMAIN: chals1.ais3.org
+      PUBLIC_SCHEME: http
+      PORT_START: "36000"
+      PORT_END: "37000"
+      INSTANCE_TTL_SECONDS: "3600"
+      WEB_NANO_CPUS: "500000000"
+      RENDERER_NANO_CPUS: "250000000"
+      RATE_LIMIT_WINDOW_SECONDS: "60"
+      LOGIN_RATE_LIMIT: "12"
+      INSTANCE_RATE_LIMIT: "20"
+      WEB_IMAGE: linkedout-web:latest
+      RENDERER_IMAGE: linkedout-renderer:latest
+      LINKEDOUT_FLAG_PATH: ${PWD}/flag.txt
+      INSTANCER_DB_PATH: /data/instancer.db
+      # Set this in production so sessions survive instancer restarts:
+      # INSTANCER_SECRET_KEY: change-me
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./instancer-data:/data
+    depends_on:
+      - web-image
+      - renderer-image
+    restart: unless-stopped
+
+  web-image:
+    image: linkedout-web:latest
+    build:
+      context: .
+      target: web
+    command: ["true"]
+
+  renderer-image:
+    image: linkedout-renderer:latest
+    build:
+      context: .
+      target: renderer
+    command: ["true"]

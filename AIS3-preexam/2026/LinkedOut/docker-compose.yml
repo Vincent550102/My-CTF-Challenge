@@ -1,0 +1,23 @@
+services:
+  web:
+    build:
+      context: .
+      target: web
+    command: sh -c 'install -m 400 -o root -g root /flag-src /run/flag && su ctf -s /bin/sh -c "python app.py"'
+    ports:
+      - "8000:8000"
+    environment:
+      RENDERER_URL: http://renderer:5001/render
+      SERVICE_ROLE: web
+    volumes:
+      - ./flag.txt:/flag-src:ro
+    depends_on:
+      - renderer
+
+  renderer:
+    build:
+      context: .
+      target: renderer
+    command: su ctf -s /bin/sh -c "python renderer.py"
+    environment:
+      SERVICE_ROLE: renderer

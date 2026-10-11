@@ -1,6 +1,14 @@
 # My-CTF-Challenge
 
 
+## AIS3-preexam-2026
+
+https://ais3.org/
+| Name | Category | Solve | Keywords |
+|------------------|----------|-------------|----------|
+| [LinkedOut](AIS3-preexam/2026/LinkedOut) | Web |  | `Flask` `Jinja2` `Python sandbox` |
+
+
 ## AIS3-EOF-final-2026
 
 https://ais3.org/

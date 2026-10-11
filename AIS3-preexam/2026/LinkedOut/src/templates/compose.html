@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="layout">
+  <aside class="panel profile-card">
+    <div class="hero-band"></div>
+    <div class="panel-pad">
+      <img class="avatar profile-avatar" src="/media?file=uploads/default.png" alt="avatar">
+      <h2>{{ user.email }}</h2>
+      <p class="muted small">Drafting a post</p>
+    </div>
+  </aside>
+  <section class="panel">
+    <div class="panel-pad">
+      <div class="composer-shell">
+        <div>
+          <h1>Create a post</h1>
+          <p class="muted">Share an update with your LinkedOut network.</p>
+        </div>
+        <form method="post">
+          <div class="composer-author">
+            <img class="feed-avatar" src="/media?file=uploads/default.png" alt="avatar">
+            <div>
+              <strong>{{ user.email }}</strong>
+              <span class="muted small">Visible to your network</span>
+            </div>
+          </div>
+          <p><textarea class="composer-textarea" name="body" rows="8" cols="72" placeholder="What do you want to talk about?"></textarea></p>
+          <div class="composer-tools">
+            <span class="snippet-pill">{{ "{{ user.email }}" }}</span>
+            <span class="snippet-pill">{{ "{{ renderer.version }}" }}</span>
+          </div>
+          <p class="muted small">Posts support safe profile snippets. Use a snippet above as a starting point.</p>
+          <p><button type="submit">Preview post</button></p>
+        </form>
+      </div>
+      {% if rendered is not none %}
+      <div class="preview-post">
+        <div class="composer-author">
+          <img class="feed-avatar" src="/media?file=uploads/default.png" alt="avatar">
+          <div>
+            <strong>{{ user.email }}</strong>
+            <span class="muted small">Preview post</span>
+          </div>
+        </div>
+        <pre>{{ rendered }}</pre>
+      </div>
+      {% endif %}
+      <p><a href="/feed">Back to feed</a></p>
+    </div>
+  </section>
+  <aside class="panel right-rail">
+    <div class="panel-pad">
+      <h2>Writing tools</h2>
+      <p class="muted small">Profile snippets are rendered before publishing.</p>
+    </div>
+  </aside>
+</section>
+{% endblock %}

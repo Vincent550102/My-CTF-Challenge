@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="layout">
+  <aside class="panel profile-card">
+    <div class="hero-band"></div>
+    <div class="panel-pad">
+      <div class="avatar avatar-initials profile-avatar">lo</div>
+      <h1>LinkedOut</h1>
+      <p class="muted">A professional network for people who are almost connected.</p>
+      <div class="actions" style="justify-content:center">
+        <a class="btn" href="/register">Join now</a>
+        <a class="btn secondary" href="/login">Sign in</a>
+      </div>
+    </div>
+  </aside>
+  <section class="panel">
+    <div class="feed-card-header">
+      <div class="feed-avatar avatar-initials">lo</div>
+      <div>
+        <h2>Welcome to your professional network</h2>
+        <p class="muted">Follow updates, write posts, and discover internal tools for local recruiters.</p>
+      </div>
+    </div>
+    <div class="panel-pad">
+      <p>LinkedOut recently launched profile snippets and Recruiter Labs for employees.</p>
+      <div class="list-links">
+        <a href="/register">Create a new account</a>
+        <a href="/login">Use an existing account</a>
+      </div>
+    </div>
+  </section>
+  <aside class="panel right-rail">
+    <div class="panel-pad">
+      <h2>LinkedOut News</h2>
+      <p class="muted small">Post templates are rolling out across the network.</p>
+      <p class="muted small">Recruiter Labs is available for local teams.</p>
+    </div>
+  </aside>
+</section>
+{% endblock %}

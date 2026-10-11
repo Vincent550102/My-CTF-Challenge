@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="auth-wrap panel">
+  <div class="hero-band"></div>
+  <div class="panel-pad">
+    <h1>Make the most of your professional life</h1>
+    <p class="muted">Create your LinkedOut profile.</p>
+    {% if error %}<p class="notice">{{ error }}</p>{% endif %}
+    <form method="post">
+      <p><input name="email" placeholder="Email"></p>
+      <p><input name="password" type="password" placeholder="Password"></p>
+      <p><button type="submit">Agree & Join</button></p>
+    </form>
+    <p class="muted">Already on LinkedOut? <a href="/login">Sign in</a></p>
+  </div>
+</section>
+{% endblock %}

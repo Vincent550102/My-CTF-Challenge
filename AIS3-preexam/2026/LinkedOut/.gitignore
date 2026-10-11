@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+linkedout.db
+instancer-data/
+.env

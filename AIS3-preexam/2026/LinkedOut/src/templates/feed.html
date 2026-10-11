@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="layout">
+  <aside class="panel profile-card">
+    <div class="hero-band"></div>
+    <div class="panel-pad">
+      <img class="avatar profile-avatar" src="/media?file=uploads/default.png" alt="avatar">
+      <h2>{{ user.email }}</h2>
+      <p class="muted small">Almost connected</p>
+      <div class="stat-row"><span>Profile views</span><strong>12</strong></div>
+      <div class="stat-row"><span>Connections</span><strong>313</strong></div>
+    </div>
+  </aside>
+  <section>
+    <div class="panel">
+      <div class="feed-card-header">
+        <img class="feed-avatar" src="/media?file=uploads/default.png" alt="avatar">
+        <a class="post-box" href="/compose">Start a post</a>
+      </div>
+      <div class="panel-pad">
+        <div class="actions">
+          <a class="btn secondary" href="/compose">Create post</a>
+          <a class="btn secondary" href="/recruiter/labs">Recruiter Labs</a>
+        </div>
+      </div>
+    </div>
+    <article class="panel" style="margin-top:16px">
+      <div class="feed-card-header">
+        <img class="feed-avatar" src="/media?file=uploads/default.png" alt="avatar">
+        <div>
+          <h1>Your feed</h1>
+          <p class="muted small">LinkedOut Product Team</p>
+        </div>
+      </div>
+      <div class="panel-pad">
+        <p>Profile snippets are now available in posts. Recruiter Labs has opened a local preview for eligible teams.</p>
+        <p><img src="/media?file=uploads/default.png" alt="avatar" width="96" height="96"></p>
+      </div>
+    </article>
+  </section>
+  <aside class="panel right-rail">
+    <div class="panel-pad">
+      <h2>Add to your feed</h2>
+      <p class="muted small">People you may almost know</p>
+      <div class="list-links">
+        <a href="/compose">Post templates</a>
+        <a href="/recruiter/labs">Recruiter Labs</a>
+        <a href="/logout">Sign out</a>
+      </div>
+    </div>
+  </aside>
+</section>
+{% endblock %}
